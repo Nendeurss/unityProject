@@ -24,6 +24,12 @@ public class Planet : MonoBehaviour {
     ShapeGenerator shapeGenerator = new ShapeGenerator();
     ColorCreator colorCreator = new ColorCreator();
 
+    /*void Awake()
+    {
+        CreatePlanet();
+        
+    }*/
+
 	void Initialize()
     {
         shapeGenerator.UpdateSettings(shapeSettings);
@@ -84,6 +90,7 @@ public class Planet : MonoBehaviour {
     {
         Initialize();
         CreateMesh();
+        GenerateColours();
     }
 
     public void OnColourSettingsUpdated()

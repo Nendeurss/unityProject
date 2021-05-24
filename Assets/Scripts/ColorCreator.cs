@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class ColorCreator {
 
@@ -12,6 +13,7 @@ public class ColorCreator {
     {
         this.settings = settings;
         //Si notre objet de possède pas de texture on lui en fabrique une
+        texture = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/texture.asset", typeof(Texture2D));
         if (texture == null)
         {
             texture = new Texture2D(textureResolution, 1);
@@ -33,5 +35,6 @@ public class ColorCreator {
         texture.SetPixels(colors);
         texture.Apply();
         settings.planetMaterial.SetTexture("_texture", texture);
+        AssetDatabase.CreateAsset(texture, "Assets/texture.asset");
     }
 }

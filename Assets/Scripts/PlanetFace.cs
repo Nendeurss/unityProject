@@ -44,7 +44,7 @@ public class PlanetFace {
                 //On n'oublie pas de normaliser pour avoir la forme arrondie
 
                 Vector3 oneVertice = (faceNormal + (ratio.x - .5f) * 2 * firstAxis + (ratio.y - .5f) * 2 * secondAxis).normalized;
-                vertices[i] = shapeGenerator.CalculatePointOnPlanet(oneVertice);
+                vertices[i] = shapeGenerator.ComputePoint(oneVertice);
 
                 //On dessine la face
                 if (x != resolution - 1 && y != resolution - 1)
@@ -66,5 +66,6 @@ public class PlanetFace {
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+        
     }
 }

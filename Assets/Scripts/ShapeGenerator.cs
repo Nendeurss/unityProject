@@ -19,14 +19,20 @@ public class ShapeGenerator {
         elevationMinMax = new MinMax();
     }
 
-    public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere)
+    /**
+     * Prend un point (vertice) sur la planète et calcul son niveau de bruit
+     * 
+     * 
+     */
+    public Vector3 ComputePoint(Vector3 vertice)
     {
         float firstLayerValue = 0;
         float elevation = 0;
 
-        if (noiseFilters.Length > 0)
+        if (noiseFilters.Length >= 1)
         {
-            firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
+            //Permet de créer un niveau de bruit
+            firstLayerValue = noiseFilters[0].Evaluate(vertice);
             if (settings.noiseLayers[0].enabled)
             {
                 elevation = firstLayerValue;
@@ -38,12 +44,12 @@ public class ShapeGenerator {
             if (settings.noiseLayers[i].enabled)
             {
                 float mask = (settings.noiseLayers[i].useFirstLayerAsMask) ? firstLayerValue : 1;
-                elevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
+                elevation += noiseFilters[i].Evaluate(vertice) * mask;
             }
         }
         elevation = settings.planetRadius * (1 + elevation);
         elevationMinMax.AddValue(elevation);
-        return pointOnUnitSphere * elevation;
+        return vertice * elevation;
     }
 }
  
