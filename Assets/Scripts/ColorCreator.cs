@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class ColorCreator {
+
+public class ColorCreator{
 
     ColorParameters settings;
     Texture2D texture;
+    int associatedPlanetId;
     const int textureResolution = 50;
 
-    public void UpdateSettings(ColorParameters settings)
+    public void UpdateSettings(ColorParameters settings,int associatedPlanetId)
     {
+        this.associatedPlanetId = associatedPlanetId;
         this.settings = settings;
+        settings.assign();
         //Si notre objet de possède pas de texture on lui en fabrique une
-        texture = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/texture.asset", typeof(Texture2D));
+        texture = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/texture"+this.associatedPlanetId+".asset", typeof(Texture2D));
         if (texture == null)
         {
             texture = new Texture2D(textureResolution, 1);
@@ -35,6 +39,13 @@ public class ColorCreator {
         texture.SetPixels(colors);
         texture.Apply();
         settings.planetMaterial.SetTexture("_texture", texture);
-        AssetDatabase.CreateAsset(texture, "Assets/texture.asset");
+        if(AssetDatabase.LoadAssetAtPath("Assets/texture"+associatedPlanetId+".asset",typeof(Texture2D)) != null)
+        {
+            AssetDatabase.SaveAssets();
+        } else
+        {
+            AssetDatabase.CreateAsset(texture, "Assets/texture"+associatedPlanetId+".asset");
+        }
+        
     }
 }

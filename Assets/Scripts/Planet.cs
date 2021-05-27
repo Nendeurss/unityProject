@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour {
 
+
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     PlanetFace[] planetFaces;
@@ -24,16 +25,12 @@ public class Planet : MonoBehaviour {
     ShapeGenerator shapeGenerator = new ShapeGenerator();
     ColorCreator colorCreator = new ColorCreator();
 
-    /*void Awake()
-    {
-        CreatePlanet();
-        
-    }*/
+    public int planetId;
 
 	void Initialize()
     {
         shapeGenerator.UpdateSettings(shapeSettings);
-        colorCreator.UpdateSettings(colorParameters);
+        colorCreator.UpdateSettings(colorParameters,planetId);
 
         if (meshFilters == null || meshFilters.Length == 0)
         {
@@ -90,7 +87,6 @@ public class Planet : MonoBehaviour {
     {
         Initialize();
         CreateMesh();
-        GenerateColours();
     }
 
     public void OnColourSettingsUpdated()
