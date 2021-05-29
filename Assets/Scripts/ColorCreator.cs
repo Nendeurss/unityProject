@@ -15,7 +15,7 @@ public class ColorCreator{
     {
         this.associatedPlanetId = associatedPlanetId;
         this.settings = settings;
-        settings.assign();
+        settings.assign(associatedPlanetId  );
         //Si notre objet de possède pas de texture on lui en fabrique une
         texture = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/texture"+this.associatedPlanetId+".asset", typeof(Texture2D));
         if (texture == null)
@@ -38,13 +38,15 @@ public class ColorCreator{
         }
         texture.SetPixels(colors);
         texture.Apply();
-        settings.planetMaterial.SetTexture("_texture", texture);
-        if(AssetDatabase.LoadAssetAtPath("Assets/texture"+associatedPlanetId+".asset",typeof(Texture2D)) != null)
+        //settings.planetMaterial.SetTexture("_texture" + this.associatedPlanetId, texture);
+        if (AssetDatabase.LoadAssetAtPath("Assets/texture"+associatedPlanetId+".asset",typeof(Texture2D)) != null)
         {
+            settings.planetMaterial.SetTexture("_texture",(Texture)AssetDatabase.LoadAssetAtPath("Assets/texture" + associatedPlanetId + ".asset", typeof(Texture2D)));
             AssetDatabase.SaveAssets();
         } else
         {
             AssetDatabase.CreateAsset(texture, "Assets/texture"+associatedPlanetId+".asset");
+            settings.planetMaterial.SetTexture("_texture", (Texture)AssetDatabase.LoadAssetAtPath("Assets/texture" + associatedPlanetId + ".asset", typeof(Texture2D)));
         }
         
     }

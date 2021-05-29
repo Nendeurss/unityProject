@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [CreateAssetMenu()]
 public class ColorParameters : ScriptableObject {
@@ -11,8 +12,16 @@ public class ColorParameters : ScriptableObject {
     [HideInInspector]
     public Material planetMaterial;
 
-    public void assign()
+    public void assign(int associatedPlanetId)
     {
-        planetMaterial = new Material(planetMaterialModel);
+        
+        planetMaterial = (Material) AssetDatabase.LoadAssetAtPath("Assets/Graphics/Planet Mat" + associatedPlanetId + ".mat", typeof(Material));
+        if (planetMaterial == null)
+        {
+            planetMaterial = new Material(planetMaterialModel);
+            AssetDatabase.CreateAsset(planetMaterial, "Assets/Graphics/Planet Mat" + associatedPlanetId + ".mat");
+        }
+            
+       
     }
 } 
