@@ -1,6 +1,8 @@
 Comment naviguer au sein de notre projet :
 
 S'assurer qu'on possède le package RP-lightweight ! (très important pour les Shaders)
+
+
 Créer sa planète :
 
 Dans un premier temps, créer un GameObject vide et appelez le par exemple "MyFirstPlanet"
