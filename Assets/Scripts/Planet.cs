@@ -5,8 +5,9 @@ using UnityEngine;
 public class Planet : MonoBehaviour {
 
 
-    [SerializeField, HideInInspector]
+    
     MeshFilter[] meshFilters;
+    MeshCollider[] meshColliders;
     PlanetFace[] planetFaces;
 
     [Range(2,256)]
@@ -50,12 +51,19 @@ public class Planet : MonoBehaviour {
                 meshObj.AddComponent<MeshRenderer>();
                 meshFilters[i] = meshObj.AddComponent<MeshFilter>();
                 meshFilters[i].sharedMesh = new Mesh();
+
+                meshColliders[i] = meshObj.AddComponent<MeshCollider>();
+                meshColliders[i] = new MeshCollider();
             }
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorParameters.planetMaterial;
 
             planetFaces[i] = new PlanetFace( meshFilters[i].sharedMesh, resolution, directions[i], shapeGenerator);
         
         }
+
+ 
+
+
     }
 
     public void CreatePlanet()

@@ -15,7 +15,7 @@ public class ColorCreator{
     {
         this.associatedPlanetId = associatedPlanetId;
         this.settings = settings;
-        settings.assign(associatedPlanetId  );
+        settings.assign(associatedPlanetId);
         //Si notre objet de possède pas de texture on lui en fabrique une
         texture = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/texture"+this.associatedPlanetId+".asset", typeof(Texture2D));
         if (texture == null)
