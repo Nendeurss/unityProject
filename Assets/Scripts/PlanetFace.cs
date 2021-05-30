@@ -63,7 +63,9 @@ public class PlanetFace {
 
         //Tout effacer pour reconstruire le Mesh
         mesh.Clear();
+        //On associe les vertices qu'on vient de créer
         mesh.vertices = vertices;
+        //On associe les triangles qu'on vient de créer
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
         

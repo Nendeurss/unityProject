@@ -8,6 +8,7 @@ public class ShapeGenerator {
     NoiseFilter[] noiseFilters;
     public MinMax elevationMinMax;
 
+    //On va chercher les paramètres de chaque niveau de bruit
     public void UpdateSettings(ShapeSettings settings)
     {
         this.settings = settings;
@@ -20,7 +21,7 @@ public class ShapeGenerator {
     }
 
     /**
-     * Prend un point (vertice) sur la planète et calcul son niveau de bruit
+     * Prend un point (vertice) sur la planète et calcul ses niveaux de bruits
      * 
      * 
      */
@@ -41,8 +42,9 @@ public class ShapeGenerator {
 
         for (int i = 1; i < noiseFilters.Length; i++)
         {
-            if (settings.noiseLayers[i].enabled)
+            if (settings.noiseLayers[i].enabled) 
             {
+                //Permet de garder la première couche de bruit comme masque, et donc de ne pas avoir de nouvelles zones de bruits.
                 float mask = (settings.noiseLayers[i].useFirstLayerAsMask) ? firstLayerValue : 1;
                 elevation += noiseFilters[i].Evaluate(vertice) * mask;
             }

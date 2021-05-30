@@ -12,6 +12,7 @@ public class ColorParameters : ScriptableObject {
     [HideInInspector]
     public Material planetMaterial;
 
+    //On associe une planète à son propre Material
     public void assign(int associatedPlanetId)
     {
         
