@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Planet : MonoBehaviour {
+public class Planet : MonoBehaviour
+{
 
 
-    
+    [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
-    MeshCollider[] meshColliders;
     PlanetFace[] planetFaces;
 
-    [Range(2,256)]
+    [Range(2, 256)]
     public int resolution = 10;
- 
+
 
     public ShapeSettings shapeSettings;
     public ColorParameters colorParameters;
@@ -28,10 +28,10 @@ public class Planet : MonoBehaviour {
 
     public int planetId;
 
-	void Initialize()
+    void Initialize()
     {
         shapeGenerator.UpdateSettings(shapeSettings);
-        colorCreator.UpdateSettings(colorParameters,planetId);
+        colorCreator.UpdateSettings(colorParameters, planetId);
 
         if (meshFilters == null || meshFilters.Length == 0)
         {
@@ -45,25 +45,18 @@ public class Planet : MonoBehaviour {
         {
             if (meshFilters[i] == null)
             {
-                GameObject meshObj = new GameObject("face"+i);
+                GameObject meshObj = new GameObject("face" + i);
                 meshObj.transform.parent = transform;
-                
+
                 meshObj.AddComponent<MeshRenderer>();
                 meshFilters[i] = meshObj.AddComponent<MeshFilter>();
                 meshFilters[i].sharedMesh = new Mesh();
-
-                meshColliders[i] = meshObj.AddComponent<MeshCollider>();
-                meshColliders[i] = new MeshCollider();
             }
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorParameters.planetMaterial;
 
-            planetFaces[i] = new PlanetFace( meshFilters[i].sharedMesh, resolution, directions[i], shapeGenerator);
-        
+            planetFaces[i] = new PlanetFace(meshFilters[i].sharedMesh, resolution, directions[i], shapeGenerator);
+
         }
-
- 
-
-
     }
 
     public void CreatePlanet()
