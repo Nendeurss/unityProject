@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetRadius: 15
   noiseLayers:
-  - enabled: 0
+  - enabled: 1
     useFirstLayerAsMask: 0
     noiseSettings:
-      strength: 0
-      numLayers: 0
-      baseRoughness: 0
-      roughness: 0
-      persistence: 0
+      strength: 0.2
+      numLayers: 5
+      baseRoughness: 150
+      roughness: 4
+      persistence: 0.3
       centre: {x: 0, y: 0, z: 0}
-      minValue: 0
+      minValue: 0.98
